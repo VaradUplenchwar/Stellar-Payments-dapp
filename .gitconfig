@@ -1,0 +1,11 @@
+[user]
+	name = Varad Uplenchwar
+	email = sdevaraduplenchwar@gmail.com
+[core]
+	autocrlf = true
+	editor = code --wait
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
