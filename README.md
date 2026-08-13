@@ -90,50 +90,7 @@ All blockchain/wallet logic is isolated in **`src/stellar.js`** — the UI layer
 
 ---
 
-## 🚀 Getting Started
 
-### Prerequisites
-
-1. Install the [Freighter](https://www.freighter.app/) browser extension.
-2. In Freighter: create or import an account → **Settings → Network → Testnet**.
-3. Node.js 18+.
-
-### Install & Run
-
-```bash
-npm install
-npm run dev
-```
-
-Open the printed URL (default `http://localhost:5173`) in the **same browser** where Freighter is installed.
-
-### Production Build
-
-```bash
-npm run build
-npm run preview
-```
-
----
-
-## 🕹️ Using the App
-
-1. **Connect** — click *Connect Freighter Wallet*, approve in the popup.
-2. **Check balance** — loads automatically. If it reads `0`, click *Fund via Friendbot* for free testnet XLM.
-3. **Send a payment**:
-   - **Destination Address** — a valid `G...` public key (56 characters)
-   - **Amount** — XLM to send
-   - **Memo** *(optional)* — up to 28 characters
-4. **Sign** — approve the transaction in the Freighter popup.
-5. **Confirm** — the result banner shows ✅ success (with hash + explorer link) or ❌ a specific failure reason.
-
-> **Note:** Stellar requires a destination account to already exist on-chain to receive a plain payment. Sending to a brand-new address fails with `op_no_destination` — fund it first via `https://friendbot.stellar.org?addr=<address>`, then retry.
-
----
-
-## 📁 Project Structure
-
-```
 stellar-payment-dapp/
 ├── src/
 │   ├── stellar.js    # All Stellar/Freighter logic: connect, balance, send, validation
@@ -160,16 +117,7 @@ stellar-payment-dapp/
 
 ---
 
-## 🌐 Deployment
 
-To get a live demo link for this README:
-
-```bash
-npm run build
-```
-Deploy the `dist/` folder to [Vercel](https://vercel.com), [Netlify](https://netlify.com), or GitHub Pages — all support static Vite builds with zero config. Paste the resulting URL at the top of this README.
-
----
 
 ## 🔭 Roadmap
 
@@ -183,10 +131,6 @@ Planned/possible extensions beyond Level 1 (not yet implemented):
 
 ---
 
-## ⚠️ Notes
-
-- Testnet only — no real funds are involved anywhere in this app.
-- Built for the Stellar Tournament as an educational/hackathon submission.
 
 ## 📄 License
 
