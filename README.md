@@ -1,5 +1,3 @@
-# Stellar-Payments_dapp<div align="center">
-
 # ⭐ Stellar Payment dApp
 
 **A clean, working XLM payment app on the Stellar Testnet : connect a wallet, check your balance, send a payment, done.**
