@@ -1,0 +1,33 @@
+/* css/minimap.css - Mini-map */
+
+#minimap {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 200px;
+  height: 140px;
+  background-color: rgba(30, 30, 30, 0.9);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  z-index: var(--z-minimap);
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: var(--shadow-toolbar);
+}
+
+.minimap-viewport {
+  position: absolute;
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+  pointer-events: none;
+  background-color: rgba(91, 155, 213, 0.08); /* --accent-subtle equivalent */
+}
+
+/* Minimap Toggle (optional state) */
+#minimap.collapsed {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--bg-toolbar);
+  /* Optional icon styling here */
+}

@@ -1,0 +1,65 @@
+/* css/connections.css - SVG Connections */
+
+#connections-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 5;
+}
+
+.connection-path {
+  fill: none;
+  stroke: #666;
+  stroke-width: 2;
+  pointer-events: stroke;
+  cursor: pointer;
+  transition: stroke var(--transition-fast);
+}
+
+.connection-path:hover {
+  stroke: #999;
+  stroke-width: 3;
+}
+
+.connection-path.selected {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.connection-draft {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  opacity: 0.7;
+}
+
+/* Arrow marker styling */
+#arrowhead, #arrowhead-selected, #arrowhead-hover {
+  fill: #666;
+  transition: fill var(--transition-fast);
+}
+
+.connection-path:hover ~ marker#arrowhead-hover { /* This is pseudo code, SVG marker coloring is complex to animate directly via CSS without duplication */
+    /* Handled by JS or inline styles often */
+}
+
+/* Connection Label */
+.connection-label {
+  position: absolute;
+  background: var(--bg-card);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  pointer-events: auto;
+  cursor: text;
+  white-space: nowrap;
+  transform: translate(-50%, -50%); /* Center on midpoint */
+  z-index: 6;
+}
