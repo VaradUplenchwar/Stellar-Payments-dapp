@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+/* Map Tailwind v4 color tokens to the theme CSS variables
+   (overridden per-theme below), so classes like bg-obsidian-surface,
+   text-obsidian-text, border-obsidian-border work. */
+@theme inline {
+  --color-obsidian-bg: var(--bg-main);
+  --color-obsidian-surface: var(--bg-surface);
+  --color-obsidian-toolbar: var(--bg-toolbar);
+  --color-obsidian-input: var(--bg-input);
+  --color-obsidian-border: var(--border-subtle);
+  --color-obsidian-text: var(--text-primary);
+  --color-obsidian-textMuted: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-subtle);
+}
+
+@layer base {
+  :root {
+    --bg-main: #141416;
+    --bg-surface: #1e1e24;
+    --bg-toolbar: #26262d;
+    --bg-input: #2a2a34;
+    --border-subtle: #33333d;
+    --border-highlight: #4a4a58;
+    --text-primary: #dcddde;
+    --text-secondary: #9e9ea0;
+    --accent: #3b82f6;
+    --accent-subtle: rgba(59, 130, 246, 0.15);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(0, 0, 0, 0.28), 0 16px 36px -16px rgba(0, 0, 0, 0.5);
+    --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.35), 0 10px 22px rgba(0, 0, 0, 0.32), 0 28px 56px -20px rgba(0, 0, 0, 0.6);
+    --shadow-pop: 0 4px 12px rgba(0, 0, 0, 0.35), 0 28px 72px -20px rgba(0, 0, 0, 0.55);
+  }
+
+  /* Light theme — strict white / black / grey palette */
+  .theme-light {
+    --bg-main: #ffffff;
+    --bg-surface: #f7f7f9;
+    --bg-toolbar: #efeff2;
+    --bg-input: #e7e7eb;
+    --border-subtle: #d9d9df;
+    --border-highlight: #b9b9c2;
+    --text-primary: #111113;
+    --text-secondary: #6a6a72;
+    --accent: #1d1d1f;
+    --accent-subtle: rgba(0, 0, 0, 0.07);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.06), 0 16px 36px -20px rgba(0, 0, 0, 0.14);
+    --shadow-card-hover: 0 2px 6px rgba(0, 0, 0, 0.06), 0 12px 26px rgba(0, 0, 0, 0.09), 0 28px 56px -20px rgba(0, 0, 0, 0.16);
+    --shadow-pop: 0 4px 14px rgba(0, 0, 0, 0.08), 0 28px 72px -28px rgba(0, 0, 0, 0.22);
+  }
+
+  /* AMOLED — pure black */
+  .theme-amoled {
+    --bg-main: #000000;
+    --bg-surface: #0a0a0c;
+    --bg-toolbar: #121215;
+    --bg-input: #1a1a1e;
+    --border-subtle: #23232b;
+    --border-highlight: #3a3a46;
+    --text-primary: #ffffff;
+    --text-secondary: #8a8a94;
+    --accent: #60a5fa;
+    --accent-subtle: rgba(96, 165, 250, 0.18);
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', 'SF Pro Text', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-feature-settings: 'cv11', 'ss01' on, 'liga';
+  user-select: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-highlight);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Card Selection & Editing */
+.canvas-element {
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+@keyframes element-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-element-in {
+  animation: element-in 0.16s ease-out;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-pop-in {
+  animation: pop-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes port-pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-subtle);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+.port-highlight {
+  opacity: 1 !important;
+  animation: port-pulse 1.6s ease-out infinite;
+}
+
+.canvas-element:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.canvas-element.selected {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  box-shadow: 0 0 0 6px var(--accent-subtle), var(--shadow-card);
+}
+
+.canvas-element[data-color="default"] { border-top: 3px solid var(--border-highlight); }
+.canvas-element[data-color="red"] { border-top: 3px solid #ef4444; }
+.canvas-element[data-color="orange"] { border-top: 3px solid #f97316; }
+.canvas-element[data-color="yellow"] { border-top: 3px solid #eab308; }
+.canvas-element[data-color="green"] { border-top: 3px solid #22c55e; }
+.canvas-element[data-color="blue"] { border-top: 3px solid #3b82f6; }
+.canvas-element[data-color="purple"] { border-top: 3px solid #a855f7; }
+
+/* Modal shell */
+.modal-shell {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-pop);
+}
+
+/* Custom CSS tooltips (data-tip + data-tip-place) */
+[data-tip] {
+  position: relative;
+}
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  pointer-events: none;
+  white-space: nowrap;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-pop);
+  color: var(--text-primary);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 4px 8px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  z-index: 90;
+}
+[data-tip]:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-tip-place="right"]::after {
+  left: calc(100% + 8px);
+  top: 50%;
+  margin-top: -14px;
+}
+[data-tip-place="top"]::after {
+  left: 50%;
+  bottom: calc(100% + 8px);
+  margin-left: -50px;
+}
+[data-tip-place="bottom"]::after {
+  left: 50%;
+  top: calc(100% + 8px);
+  margin-left: -50px;
+}
+
+/* Grid Background */
+#grid-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Fade-in animation (replaces tailwindcss-animate) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.15s ease-out forwards;
+}
